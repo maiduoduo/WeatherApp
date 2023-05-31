@@ -27,8 +27,10 @@ class WeatherViewModel @Inject constructor(
                 isLoading = true,
                 error = null
             )
-            locationTracker.getCurrentLocation()?.let { location ->
-                when(val result = repository.getWeatherData(location.latitude, location.longitude)) {
+//            locationTracker.getCurrentLocation()?.let { location ->
+                val latitude = 52.52
+                val longitude = 13.41
+                when(val result = repository.getWeatherData(latitude, longitude)) {
                     is Resource.Success -> {
                         state = state.copy(
                             weatherInfo = result.data,
@@ -44,12 +46,13 @@ class WeatherViewModel @Inject constructor(
                         )
                     }
                 }
-            } ?: kotlin.run {
-                state = state.copy(
-                    isLoading = false,
-                    error = "Couldn't retrieve location. Make sure to grant permission and enable GPS."
-                )
-            }
+//            }
+//            ?: kotlin.run {
+//                state = state.copy(
+//                    isLoading = false,
+//                    error = "Couldn't retrieve location. Make sure to grant permission and enable GPS."
+//                )
+//            }
         }
     }
 }
